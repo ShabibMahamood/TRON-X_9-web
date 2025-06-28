@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON!X 9 | Official Website</title>
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --primary-color: #6e44ff;
+            --secondary-color: #ff44e3;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/api/placeholder/1920/1080') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, #872e97 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(110, 68, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(110, 68, 255, 0.6);
+        }
+
+        /* Bio Section */
+        .biography {
+            padding: 100px 0;
+            background-color: var(--darker-bg);
+        }
+
+        .bio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            padding: 0 20px;
+        }
+
+        .bio-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .bio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .bio-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .bio-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .bio-content h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .bio-content p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Latest Release Section */
+        .latest-release {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .latest-release::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(var(--primary-color), transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+        }
+
+        .latest-release::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(var(--secondary-color), transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+        }
+
+        .release-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .release-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .release-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .release-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(110, 68, 255, 0.3);
+        }
+
+        .release-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .release-img img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .release-card:hover .release-img img {
+            transform: scale(1.1);
+        }
+
+        .release-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .release-card:hover .release-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1);
+            background-color: var(--primary-color);
+        }
+
+        .play-btn i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .release-info {
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .release-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .release-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .release-date {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .release-date i {
+            margin-right: 5px;
+        }
+
+        /* Showcase Releases Section */
+        .releases-section {
+            padding: 100px 0;
+            background-color: var(--darker-bg);
+        }
+
+        .all-releases {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Remixes Section */
+        .remixes-section {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+            position: relative;
+        }
+
+        /* Social Section */
+        .social-section {
+            padding: 100px 0;
+            background-color: var(--darker-bg);
+        }
+
+        .social-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .social-card {
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .social-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .social-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0 30px;
+            background-color: var(--darker-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .bio-container {
+                grid-template-columns: 1fr;
+            }
+
+            .bio-img {
+                max-width: 500px;
+                margin: 0 auto 40px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--darker-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">TRON!X 9</div>
+            <div class="nav-toggle">
+                
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#releases">Releases</a></li>
+                    <li><a href="#remixes">Remixes</a></li>
+                    <li><a href="#social">Social</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mirage out now</h1>
+            <p>Listen To My Latest Tracks </p>
+            <a href="#latest-release" class="cta-button">Latest Release</a>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="biography" id="bio">
+        <div class="bio-container">
+            <div class="bio-img">
+                <img src="public/ProfilePic.png" alt="Artist Photo">
+            </div>
+            <div class="bio-content">
+                <h2>Biography</h2>
+                <p>Welcome to my official website. I am an electronic music producer in Kerala. With influences ranging
+                    from DnB, Slap House , HyperTechno & Big Room, my sound is characterized by immersive atmospheres,
+                    intricate rhythms, and emotive melodies.</p>
+                <p>Since beginning my journey in 2023, I've released music on my own label as 6528 RCRDS . My production
+                    approach combines analog hardware with digital processing, creating a unique sonic signature that
+                    bridges the gap between classic electronic sounds and cutting-edge production techniques.</p>
+                <p>Whether I'm crafting dance floor anthems or experimental soundscapes, my goal remains the same: to
+                    create emotional connections through sound and push the boundaries of electronic music.</p>
+                <p>When not in the studio or performing, I'm constantly seeking new inspirations and collaborating with
+                    other artists across various disciplines to expand my creative horizons.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Release Section -->
+    <section class="latest-release" id="latest-release">
+        <div class="release-container">
+            <div class="section-title">
+                <h2>Latest Release</h2>
+                <p>Check out my newest music release and explore my latest sonic journey.</p>
+            </div>
+            <div class="release-grid">
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/E30.jpg" alt="E30">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('E30.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>E30</h3>
+                        <p>Single Release</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: June 17, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/Mirage.jpg" alt="Mirage">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('Mirage.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Mirage</h3>
+                        <p>Single Release With ZAROX</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: June 06, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/Distortion.jpg" alt="Distortion">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('Distortion.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Distortion</h3>
+                        <p>Single Release</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: December 25, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Releases Section -->
+    <section class="releases-section" id="releases">
+        <div class="release-container">
+            <div class="section-title">
+                <h2>Releases</h2>
+                <p>Explore my complete discography and musical journey.</p>
+            </div>
+            <div class="all-releases">
+                <!-- Release Cards (Repeated for demonstration) -->
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/E30.jpg" alt="E30">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('E30.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>E30</h3>
+                        <p>Single ( Ambient Techno )</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: June 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/Mirage.jpg" alt="Mirage">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('Mirage.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Mirage</h3>
+                        <p>Single ( Slap House )</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: June 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/fade.jpg" alt="Fade">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('Fade.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Fade</h3>
+                        <p>Single ( Electro House )</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: April 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/Distortion.jpg" alt="Distortion">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('Distortion.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Distortion</h3>
+                        <p>Single ( Deep House )</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: Dec 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/Pillage.jpg" alt="Pillage">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('PILLAGE.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Pillage</h3>
+                        <p>Single ( Progressive House )</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: Sep 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Remixes Section -->
+    <section class="remixes-section" id="remixes">
+        <div class="release-container">
+            <div class="section-title">
+                <h2>Remixes</h2>
+                <p>Check out my reinterpretations of tracks by other artists.</p>
+            </div>
+            <div class="all-releases">
+                <!-- Remix Cards -->
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/JustDanceRemix.jpeg" alt="JustDance">
+                        <div class="release-overlay">
+                            <div class="play-btn">
+                                <i class="fas fa-play" onclick="playAudio('JustDanceRemix.mp3')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>Lady Gaga - Just Dance (Slap House Remix)</h3>
+                        <p>Label: Label Name</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: Feb 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="release-card">
+                    <div class="release-img">
+                        <img src="public/TitaniumRemix.webp" alt="Titanium">
+                        <div class="release-overlay">
+                                <div class="play-btn">
+                                    <i class="fas fa-play" onclick="playAudio('TitaniumRemix.mp3')"></i>
+                                </div>        
+                        </div>
+                    </div>
+                    <div class="release-info">
+                        <h3>David Guetta & Sia - Titanium (HyperTechno Remix)</h3>
+                        <p>Label: Another Label</p>
+                        <div class="release-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>Released: Sep 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section" id="social">
+        <div class="social-container">
+            <div class="section-title">
+                <h2>Connect With Me</h2>
+                <p>Follow me on social media and music platforms to stay updated with my latest releases and shows.</p>
+            </div>         
+            <div class="social-grid">
+                <div class="social-card">
+                    <a href="https://open.spotify.com/artist/5d6tLVcX5zmbzpKAAX29dJ?si=grxRuxuLQkmVM0v7KBILCA"  style="text-decoration: none;">
+                        <div class="social-icon">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                    </a>        
+                        <h3>Spotify</h3>
+                </div>
+            </div>
+            <div class="social-grid">
+                <div class="social-card">
+                    <a href="https://soundcloud.com/tronix_9"  style="text-decoration: none;">
+                        <div class="social-icon">
+                            <i class="fa-brands fa-soundcloud"></i>
+                        </div>
+                    </a>   
+                        <h3>SoundCloud</h3>
+                </div>
+            </div>
+            <div class="social-grid">
+                <div class="social-card">
+                    <a href="https://instagram.com/tronix9_music"  style="text-decoration: none;">
+                        <div class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                    </a>   
+                        <h3>Instagram</h3>
+                </div>
+            </div>
+
+
+
+
+<!-- JavaScript -->
+<script>
+  let currentAudio = null;
+
+  function playAudio(src) {
+    // Stop current audio if it's playing
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+
+    // Create new audio instance
+    currentAudio = new Audio(src);
+    currentAudio.play();
+  }
+</script>
