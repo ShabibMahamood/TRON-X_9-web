@@ -1,0 +1,48 @@
+{
+  "releases": [
+    {
+      "title": "Out Of Control",
+      "type": "Big Room",
+      "cover": "OutOfControlV2.jpg",
+      "audio": "Out Of Control (mastered)V2.mp3",
+      "date": "2025-07-25"
+    },
+    {
+      "title": "E30",
+      "type": "Ambient Techno",
+      "cover": "E30.jpg",
+      "audio": "E30.mp3",
+      "date": "2025-06-17"
+    },
+    {
+      "title": "Mirage (with ZAROX)",
+      "type": "Slap House",
+      "cover": "Mirage.jpg",
+      "audio": "Mirage.mp3",
+      "date": "2025-06-06"
+    },
+    {
+      "title": "Fade",
+      "type": "Electro House",
+      "cover": "FadeV2.jpg",
+      "audio": "Fade.mp3",
+      "date": "2025-04-25"
+    },
+    {
+      "title": "Distortion",
+      "type": "Deep House",
+      "cover": "Distortion.jpg",
+      "audio": "Distortion.mp3",
+      "date": "2024-12-01"
+    },
+    {
+      "title": "Pillage",
+      "type": "Progressive House",
+      "cover": "Pillage.jpg",
+      "audio": "PILLAGE.mp3",
+      "date": "2024-09-25"
+    }
+    
+  ]
+  
+}
