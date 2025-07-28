@@ -289,6 +289,69 @@
             filter: blur(80px);
         }
 
+        /* Loading Animation Styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--darker-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-logo {
+    width: 150px;
+    margin-bottom: 30px;
+    animation: pulse 2s infinite;
+}
+
+.loader-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.loader-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    animation: loading 2s ease-in-out forwards;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Add this to hide content until loaded */
+body.loading {
+    overflow: hidden;
+}
+
+body.loaded .loader {
+    opacity: 0;
+    visibility: hidden;
+}
+
         .release-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -644,6 +707,13 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
+
+            .loader-logo {
+        width: 120px;
+    }
+    .loader-bar {
+        width: 180px;
+    }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -652,6 +722,16 @@
 </head>
 
 <body>
+    
+    <div class="loader">
+        <div class="loader-logo">
+            <img src="ArtistLOGO.png" alt="TRON!X 9 Loading">
+        </div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+    
     <!-- Header Section -->
     <header>
     <div class="header-container">
@@ -782,6 +862,18 @@
                 </div>
             </div>
 
+            <script>
+    // Loading Animation
+    document.body.classList.add('loading');
+    
+    window.addEventListener('load', function() {
+        // Wait for the loading animation to complete
+        setTimeout(function() {
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
+        }, 2000); // Matches the 2s animation duration
+    });
+</script>
 
 <script>
     // Mobile Navigation Toggle
