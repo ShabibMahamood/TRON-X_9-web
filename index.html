@@ -59,13 +59,20 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            cursor: pointer;
+            height: 30px; /* Adjust to match your logo's aspect ratio */
+            display: flex;
+            align-items: center;
         }
+
+        .logo img {
+    height: 100%;
+    width: auto; /* Maintain aspect ratio */
+    transition: opacity 0.3s ease;
+}
+
+.logo img:hover {
+    opacity: 0.8;
+}
 
         .nav-toggle {
             display: none;
@@ -622,7 +629,10 @@
     <!-- Header Section -->
     <header>
         <div class="header-container">
-            <div class="logo">TRON!X 9</div>
+            <div class="logo">
+                <a href="/">    
+                <img src="ArtistLOGO.png" alt="TRON!X 9 Logo" style="height: 90px;"></div>
+                </a>
             <div class="nav-toggle">
                 
             </div>
