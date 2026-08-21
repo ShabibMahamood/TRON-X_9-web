@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { latestRelease, releases } from '@/data/releases';
+import { latestRelease, releases } from '../data/releases';
 
 export default function Home() {
   return (
@@ -13,7 +13,6 @@ export default function Home() {
             <Link href="/social">Social</Link>
           </div>
         </nav>
-
         <section className="hero">
           <div>
             <div className="eyebrow">Electronic artist / producer</div>
@@ -26,21 +25,9 @@ export default function Home() {
             <div className="tag">Latest release — {latestRelease.title}</div>
           </div>
         </section>
-
         <section className="section">
-          <div className="section-head">
-            <div><div className="eyebrow">Selected music</div><h2>RELEASES</h2></div>
-            <Link className="button" href="/releases">View all</Link>
-          </div>
-          <div className="grid">
-            {releases.slice(0, 3).map((release) => (
-              <article className="card" key={release.title}>
-                <img src={release.artwork} alt={release.title} />
-                <h3>{release.title}</h3>
-                <span>{release.type} · {release.date}</span>
-              </article>
-            ))}
-          </div>
+          <div className="section-head"><div><div className="eyebrow">Selected music</div><h2>RELEASES</h2></div><Link className="button" href="/releases">View all</Link></div>
+          <div className="grid">{releases.slice(0, 3).map((release) => <article className="card" key={release.title}><img src={release.artwork} alt={release.title} /><h3>{release.title}</h3><span>{release.type} · {release.date}</span></article>)}</div>
         </section>
       </main>
       <footer className="footer shell">© {new Date().getFullYear()} TRON!X 9</footer>
