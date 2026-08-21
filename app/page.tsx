@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { latestRelease, releases } from '../data/releases';
+import { releases } from '../data/releases';
 import { FadeIn, Reveal } from '../components/Motion';
+
+const latestRelease = releases[0];
 
 export default function Home() {
   return (
