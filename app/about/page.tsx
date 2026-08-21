@@ -1,0 +1,3 @@
+import Link from 'next/link';
+
+export default function AboutPage(){return <main className="shell"><nav className="nav"><Link className="brand" href="/">TRON!X 9</Link><div className="links"><Link href="/releases">Releases</Link><Link href="/about">About</Link><Link href="/social">Social</Link></div></nav><section className="section"><div className="hero"><div><div className="eyebrow">About the artist</div><h2>TRON!X 9</h2><p>TRON!X 9 is an electronic music project focused on modern club energy, melodic atmosphere and bold production. The project moves freely across EDM styles while keeping a distinct visual and sonic identity.</p></div><div className="art"><img src="/New%20Profle%20Pic/TRON!X9NEWDP.jpg" alt="TRON!X 9"/></div></div></section></main>}
