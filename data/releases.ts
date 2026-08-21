@@ -4,6 +4,7 @@ export type Release = {
   date: string;
   artwork: string;
   spotify?: string;
+  appleMusic?: string;
   youtube?: string;
   soundcloud?: string;
 };
