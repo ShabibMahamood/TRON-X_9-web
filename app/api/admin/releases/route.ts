@@ -1,9 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readStore, writeStore, type StoredRelease } from '../../../../lib/cms-store';
+import { sql } from '../../../../lib/db';
+
+export const dynamic = 'force-dynamic';
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `release-${Date.now()}`;
+}
 
 export async function GET() {
-  const store = await readStore();
-  return NextResponse.json(store);
+  try {
+    const releases = await sql`
+      SELECT id, title, type, date, artwork,
+             spotify, apple_music AS "appleMusic",
+             youtube, soundcloud, published
+      FROM releases
+      ORDER BY created_at DESC
+    `;
+    return NextResponse.json({ releases });
+  } catch (error) {
+    console.error('GET /api/admin/releases failed', error);
+    return NextResponse.json({ error: 'database unavailable' }, { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -13,40 +30,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'title and artwork are required' }, { status: 400 });
     }
 
-    const store = await readStore();
-    const baseId = String(body.title)
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '') || `release-${Date.now()}`;
-
-    const existingIds = new Set(store.releases.map((item) => item.id));
+    const baseId = slugify(String(body.title).trim());
+    const existing = await sql`SELECT id FROM releases WHERE id LIKE ${baseId + '%'} ORDER BY id`;
+    const used = new Set(existing.map((row) => String(row.id)));
     let id = baseId;
     let suffix = 2;
-    while (existingIds.has(id)) id = `${baseId}-${suffix++}`;
+    while (used.has(id)) id = `${baseId}-${suffix++}`;
 
-    const release: StoredRelease = {
-      id,
-      title: String(body.title).trim(),
-      type: String(body.type ?? 'Single').trim(),
-      date: String(body.date ?? new Date().getFullYear()).trim(),
-      artwork: String(body.artwork).trim(),
-      ...(body.spotify ? { spotify: String(body.spotify).trim() } : {}),
-      ...(body.appleMusic ? { appleMusic: String(body.appleMusic).trim() } : {}),
-      ...(body.youtube ? { youtube: String(body.youtube).trim() } : {}),
-      ...(body.soundcloud ? { soundcloud: String(body.soundcloud).trim() } : {}),
-      published: body.published !== false,
-    };
+    const title = String(body.title).trim();
+    const type = String(body.type ?? 'Single').trim();
+    const date = String(body.date ?? new Date().getFullYear()).trim();
+    const artwork = String(body.artwork).trim();
+    const spotify = body.spotify ? String(body.spotify).trim() : null;
+    const appleMusic = body.appleMusic ? String(body.appleMusic).trim() : null;
+    const youtube = body.youtube ? String(body.youtube).trim() : null;
+    const soundcloud = body.soundcloud ? String(body.soundcloud).trim() : null;
+    const published = body.published !== false;
 
-    const nextStore = {
-      ...store,
-      releases: [release, ...store.releases],
-      latestReleaseId: body.makeLatest === true ? id : store.latestReleaseId,
-    };
+    const [release] = await sql`
+      INSERT INTO releases (id, title, type, date, artwork, spotify, apple_music, youtube, soundcloud, published)
+      VALUES (${id}, ${title}, ${type}, ${date}, ${artwork}, ${spotify}, ${appleMusic}, ${youtube}, ${soundcloud}, ${published})
+      RETURNING id, title, type, date, artwork,
+                spotify, apple_music AS "appleMusic",
+                youtube, soundcloud, published
+    `;
 
-    await writeStore(nextStore);
     return NextResponse.json(release, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: 'invalid request' }, { status: 400 });
+  } catch (error) {
+    console.error('POST /api/admin/releases failed', error);
+    return NextResponse.json({ error: 'could not create release' }, { status: 500 });
   }
 }
